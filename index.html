@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1" />
+<meta name="theme-color" content="#050505" />
+<meta name="description" content="Mizan — a personal clinical and basic sciences reference." />
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="Mizan" />
+<link rel="apple-touch-icon" href="icon.png" />
+<link rel="icon" type="image/png" href="icon.png" />
+<link rel="manifest" href="manifest.json" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Amiri:ital@0;1&family=Inter:wght@400;500;600&display=swap"
+  rel="stylesheet"
+/>
+
+<title>Mizan</title>
+
+<style>
+  * { box-sizing: border-box; }
+  html, body, #root { height: 100%; margin: 0; padding: 0; background: #050505; }
+  body {
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overscroll-behavior: none;
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .mizan-splash {
+    position: fixed; inset: 0; z-index: 9999;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    background: radial-gradient(circle at 50% 40%, #141210 0%, #0a0908 55%, #020202 100%);
+    overflow: hidden;
+    animation: mizanFadeIn 0.4s ease-out both;
+  }
+  .mizan-splash--out { animation: mizanFadeOut 0.55s ease-in both; pointer-events: none; }
+  .mizan-splash__stars { position: absolute; inset: 0; }
+  .mizan-splash__star {
+    position: absolute; border-radius: 50%; background: #f7e2a0; opacity: 0.15;
+    animation-name: mizanTwinkle; animation-iteration-count: infinite; animation-timing-function: ease-in-out;
+  }
+  .mizan-splash__glyph-wrap { width: 132px; height: 132px; margin-bottom: 22px; }
+  .mizan-splash__glyph { width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 0 6px rgba(212,175,55,0.55)); }
+  .mizan-splash__line {
+    fill: none; stroke: #d4af37; stroke-width: 6; stroke-linecap: round; stroke-linejoin: round;
+    stroke-dasharray: 340; stroke-dashoffset: 340;
+    animation: mizanDraw 1.1s cubic-bezier(0.65,0,0.35,1) forwards;
+  }
+  .mizan-splash__line--a { animation-delay: 0.05s; }
+  .mizan-splash__line--b { animation-delay: 0.25s; }
+  .mizan-splash__line--m { stroke-width: 9; stroke-dasharray: 220; stroke-dashoffset: 220; animation-delay: 0.55s; }
+  .mizan-splash__wordmark {
+    display: flex; gap: 0.32em; font-family: "Amiri", Georgia, serif; font-size: 2rem;
+    color: #f0dca0; letter-spacing: 0.15em; opacity: 0;
+    animation: mizanWordFade 0.7s ease-out 1s forwards;
+  }
+  .mizan-splash__wordmark span { display: inline-block; opacity: 0; transform: translateY(6px); animation: mizanLetterUp 0.5s ease-out forwards; }
+  .mizan-splash__wordmark span:nth-child(1) { animation-delay: 1.05s; }
+  .mizan-splash__wordmark span:nth-child(2) { animation-delay: 1.12s; }
+  .mizan-splash__wordmark span:nth-child(3) { animation-delay: 1.19s; }
+  .mizan-splash__wordmark span:nth-child(4) { animation-delay: 1.26s; }
+  .mizan-splash__wordmark span:nth-child(5) { animation-delay: 1.33s; }
+  .mizan-splash__tagline {
+    margin-top: 10px; font-family: "Inter", system-ui, sans-serif; font-size: 0.7rem;
+    letter-spacing: 0.08em; color: #8a7a4a; opacity: 0;
+    animation: mizanFadeIn 0.6s ease-out 1.5s forwards;
+  }
+  @keyframes mizanDraw { to { stroke-dashoffset: 0; } }
+  @keyframes mizanWordFade { to { opacity: 1; } }
+  @keyframes mizanLetterUp { to { opacity: 1; transform: translateY(0); } }
+  @keyframes mizanTwinkle { 0%, 100% { opacity: 0.1; } 50% { opacity: 0.75; } }
+  @keyframes mizanFadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes mizanFadeOut { from { opacity: 1; } to { opacity: 0; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .mizan-splash, .mizan-splash--out, .mizan-splash__star, .mizan-splash__line,
+    .mizan-splash__wordmark, .mizan-splash__wordmark span, .mizan-splash__tagline { animation: none !important; }
+    .mizan-splash__line { stroke-dashoffset: 0; }
+    .mizan-splash__wordmark, .mizan-splash__wordmark span, .mizan-splash__tagline { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <!-- React and ReactDOM only — no Babel needed, everything is precompiled plain JS -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+
+  <!-- Precompiled app code (JSX already converted to React.createElement ahead of time) -->
+  <script src="Mizan.compiled.js"></script>
+  <script src="app-shell.compiled.js"></script>
+</body>
+</html>
